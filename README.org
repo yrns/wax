@@ -1,0 +1,4 @@
+* wax
+This is a direct rip of [[https://github.com/huggingface/candle][candle]]'s whisper example, with the addition of
+streaming from the default input audio device, a very simple VAD, and
+outputs to a notification and the clipboard.
