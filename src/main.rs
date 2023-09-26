@@ -79,7 +79,7 @@ pub fn listen(tx: Sender<Message>) -> Result<()> {
         }
 
         let rms = rms(data);
-        quiet_samples = if rms < 0.006 {
+        quiet_samples = if rms < 0.008 {
             quiet_samples.saturating_add(data.len() as u32)
         } else {
             buf.extend_from_slice(data);
