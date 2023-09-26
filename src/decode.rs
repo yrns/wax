@@ -304,9 +304,8 @@ pub fn decoder(device: &Device) -> Result<Decoder> {
 
     let tokenizer = Tokenizer::from_file(tokenizer_filename).map_err(E::msg)?;
 
-    let weights = unsafe { candle::safetensors::MmapedFile::new(weights_filename)? };
-    let weights = weights.deserialize()?;
-    let vb = VarBuilder::from_safetensors(vec![weights], m::DTYPE, &device);
+    let vb =
+        unsafe { VarBuilder::from_mmaped_safetensors(&[weights_filename], m::DTYPE, &device)? };
     let config: Config = serde_json::from_str(&std::fs::read_to_string(config_filename)?)?;
     let model = Whisper::load(&vb, config)?;
 
